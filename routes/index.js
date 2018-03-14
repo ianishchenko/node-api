@@ -9,7 +9,11 @@ for (let route in routes) {
         routeConfig = routes[route];
     if('middleware' in routeConfig){
         if(!Array.isArray(routeConfig.middleware)){
-            routeConfig.middleware = [routeConfig.middleware];
+            routeConfig.middleware = [require('../middleware/'+routeConfig.middleware)];
+        } else {
+            for (let routeMiddleware in routeConfig.middleware){
+                routeConfig.middleware[routeMiddleware] = require('../middleware/'+routeConfig.middleware[routeMiddleware]);
+            }
         }
     } else {
         routeConfig.middleware = [];

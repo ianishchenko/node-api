@@ -1,18 +1,13 @@
 module.exports = {
-    postgres: {
-        host: process.env.API_DB_HOST,
-        port: process.env.API_DB_PORT,
+    development: {
+        //for migrations
+        username: process.env.API_DB_USER,
+        //for sequelize
         user: process.env.API_DB_USER,
         password: process.env.API_DB_PASSWORD,
         database: process.env.API_DB_NAME,
-        dialect: 'postgres'
-    },
-    mysql: {
-        host: process.env.API_DB_HOST,
+        host: process.env.API_DB_HOST||'localhost',
         port: process.env.API_DB_PORT,
-        user: process.env.API_DB_USER,
-        password: process.env.API_DB_PASSWORD,
-        database: process.env.API_DB_NAME,
-        dialect: 'mysql'
+        dialect: process.env.API_DB_DRIVER||'postgres'
     }
 };

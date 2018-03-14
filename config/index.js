@@ -30,7 +30,7 @@ class Config {
     }
 
     get currentConnection() {
-        return appConfig.connections[process.env.API_DB_DRIVER]
+        return appConfig.connections[NODE_ENV]
     }
 }
 

@@ -1,9 +1,9 @@
 module.exports = {
-    // 'GET /profile': {
-    //     controller: 'UserController',
-    //     action: 'find',
-    //     middleware: require('../middleware/Auth')
-    // },
+    'GET /profile': {
+        controller: 'UserController',
+        action: 'find',
+        middleware: 'auth'
+    },
 
     'GET /users': {
         controller: 'UserController',

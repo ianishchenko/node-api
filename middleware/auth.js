@@ -2,9 +2,12 @@
 
 // const LocalStrategy   = require('passport-local').Strategy, User = require('../models/User');
 
+
 module.exports = function (req, res, next) {
-    // const err = new Error('Unauthorize');
-    // err.status = 401;
-    // next(err);
+    // if (req.isAuthenticated())
+    //     return next();
+    console.log('AUTH!!!!');
     next();
+    // if they aren't redirect them to the home page
+    // res.redirect('/');
 };
