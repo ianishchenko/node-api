@@ -1,4 +1,4 @@
-# Carbon API
+# NodeJs API
 
 Developed with using of [Express.js](https://expressjs.com) framework.
 ### Tips and tricks :book:

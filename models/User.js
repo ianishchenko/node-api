@@ -1,35 +1,23 @@
 'use strict';
 
-const bcrypt   = require('bcrypt-nodejs');
-
 module.exports = (ORM, DataTypes) => {
     const User = ORM.define('User',
         {
-            id: {type: DataTypes.INTEGER, primaryKey: true},
+            id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
             email: DataTypes.STRING,
-            password: DataTypes.STRING
+            firstName: {type: DataTypes.STRING, field: 'first_name'},
+            lastName: {type: DataTypes.STRING, field: 'last_name'},
+            googleId: {type: DataTypes.STRING, field: 'google_id'},
         }, {
             tableName: 'users',
-            timestamps: false
+            underscored: true
         }
     );
 
-    User.prototype.toJSON =  function () {
-        const values = Object.assign({}, this.get());
-
-        delete values.password;
-        return values;
-    };
-
-    // generating a hash
-    User.generateHash = function(password) {
-        return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-    };
-
-    // checking if password is valid
-    User.prototype.isValidPassword = function(password) {
-        return bcrypt.compareSync(password, this.password);
-    };
+    process.nextTick(() => {
+        const {AccessToken} = require('./');
+        User.hasMany(AccessToken);
+    });
 
     return User;
 };

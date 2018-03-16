@@ -4,7 +4,7 @@ const express = require('express'),
     bodyParser = require('body-parser'),
     helmet = require('helmet'),
     cors = require('cors'),
-    // passport = require('passport'),
+    passport = require('passport'),
     compression = require('compression');
 
 const app = express();
@@ -19,8 +19,9 @@ if (process.env.NODE_ENV === undefined || process.env.NODE_ENV !== 'production')
 }
 
 const Router = require('./routes');
+require('./passport')();
 
-// app.use(passport.initialize());
+app.use(passport.initialize());
 app.use(helmet());
 app.use(cors());
 app.use(compression());
@@ -46,6 +47,6 @@ app.use(function (err, req, res, next) {
     next();
 });
 
-const { API_PORT = 3000 } = process.env;
+const { API_PORT = 3001 } = process.env;
 
 app.listen(API_PORT, () => console.log(`Listening API on port ${API_PORT}`));

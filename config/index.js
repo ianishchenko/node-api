@@ -5,6 +5,7 @@ const { NODE_ENV = 'development' } = process.env;
 const deepmerge = require('deepmerge');
 
 const connections = require('./connections'),
+    auth = require('./auth'),
     routes = require('./routes'),
     environment = require(`./env/${NODE_ENV}`);
 
@@ -14,6 +15,7 @@ class Config {
 
     load() {
         appConfig.connections = deepmerge(connections, this.getEnvironmentConfig('connections'));
+        appConfig.auth = deepmerge(auth, this.getEnvironmentConfig('auth'));
         appConfig.routes = routes;
     }
 
@@ -31,6 +33,10 @@ class Config {
 
     get currentConnection() {
         return appConfig.connections[NODE_ENV]
+    }
+
+    get configAuth() {
+        return appConfig.auth;
     }
 }
 
