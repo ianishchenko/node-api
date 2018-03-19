@@ -75,12 +75,16 @@ module.exports = {
         const user = req.user;
 
         const hash = AccessToken.generateHash(user);
-        const token = await AccessToken.create({
-            token: hash
-        });
+        try {
+            const token = await AccessToken.create({
+                token: hash
+            });
+            console.log(token);
+            token.setUser(user);
 
-        token.setUser(user);
-
-        res.status(200).json({token: token.token});
+            res.status(200).json({token: token.token});
+        } catch (e){
+            next(e);
+        }
     }
 };

@@ -14,10 +14,9 @@ module.exports = (ORM, DataTypes) => {
         }
     );
 
-    process.nextTick(() => {
-        const {AccessToken} = require('./');
-        User.hasMany(AccessToken);
-    });
+    User.associate = function (models) {
+        models.User.hasMany(models.AccessToken);
+    };
 
     return User;
 };

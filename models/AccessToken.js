@@ -25,11 +25,9 @@ module.exports = (ORM, DataTypes) => {
         return access_token.expiresAt = currentDate.getTime();
     });
 
-    process.nextTick(() => {
-        const {User} = require('./');
-        AccessToken.belongsTo(User);
-        ORM.sync;
-    });
+    AccessToken.associate = function (models) {
+        models.AccessToken.belongsTo(models.User);
+    };
 
     return AccessToken;
 };

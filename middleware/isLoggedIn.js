@@ -20,14 +20,14 @@ module.exports = async function (req, res, next) {
             });
             if (!token) {
                 cookies.set('access_token', null);
-                errorFunc(next)
+                return errorFunc(next);
             } else {
                 next();
             }
         } catch (e) {
-            errorFunc(next)
+            return errorFunc(next);
         }
     } else {
-        errorFunc(next)
+        return errorFunc(next);
     }
 };

@@ -23,6 +23,7 @@ function initPassport() {
         async function (profile, googleId, done) {
             try {
                 const user = await User.findOne({'google_id': googleId});
+
                 if (user) {
                     return done(null, user);
                 } else {
