@@ -57,9 +57,10 @@ module.exports = {
                     token.destroy();
                 }
             } catch (e) {
+                next(e);
             }
+            cookies.set('access_token', null);
         }
-        cookies.set('access_token', null);
 
         res.status(204).send({});
     },
@@ -79,7 +80,6 @@ module.exports = {
             const token = await AccessToken.create({
                 token: hash
             });
-            console.log(token);
             token.setUser(user);
 
             res.status(200).json({token: token.token});

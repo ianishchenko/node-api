@@ -27,4 +27,10 @@ module.exports = {
         action: 'googleCallback',
         middleware: 'googleSignIn'
     },
+
+    'POST /files/upload/users/:user_id' :{
+        controller: 'FileController',
+        action: 'uploadUserFile',
+        middleware: 'singleFile'
+    }
 };
